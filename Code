@@ -1,0 +1,64 @@
+def div(lst, n):  # dividir a lista dos inputs de 2 em 2
+    for i in range(0, len(lst), n):
+        yield lst[i: i + n]
+    return lst
+
+
+l = [1, 2, 3, 4]
+l2 = list(div(l, 2))
+
+
+def dist(l1, l2):  # distancia entre 2 pontos
+    a = (l2[0]) ** 2
+    b = (l2[1] - l1[1]) ** 2
+    c = (a + b) ** (1 / 2)
+    return c
+
+
+def maior(l):
+    if len(l) == 0:
+        return 0
+    else:
+        return max(l)
+
+
+def menor(l):
+    if len(l) == 0:
+        return 0
+    else:
+        return min(l)
+
+
+rsp = []
+l = []
+while True:
+    x = input().split()
+    n = int(x[0])
+    y = int(x[1])
+    if n == 0 and y == 0:
+        for i in rsp:
+            print(i+1)
+        break
+
+    for i in range(n):
+        x2 = input()
+        x2 = x2.split()
+        for i in range(len(x2)):
+            l.append(int(x2[i]))
+
+    l2 = list(div(l, 2))
+
+    ################
+    b = []  # maior das dist de c
+    for c in range(1, y):
+        a = []
+        for j in range(len(l2)):
+            d = dist([0,c], l2[j])
+            a.append(d)
+        b.append(maior(a))
+    r = b.index(menor(b))
+    rsp.append(r)
+    ############
+    l.clear() #vai no final
+
+
